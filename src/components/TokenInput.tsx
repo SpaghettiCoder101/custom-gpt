@@ -14,8 +14,8 @@ export default function TokenInput({ token, tokenChange }:Props) {
     }
 
     return (
-        <Popover>
-            <Popover.Button className="border p-2">
+        <Popover className="bg-blue-500 p-2 w-fit rounded-lg border-solid border-blue-200 border-2">
+            <Popover.Button className="focus-visible:border-none focus-visible:outline-none text-white">
               Set Tokens ({token})
             </Popover.Button>
             <Popover.Panel className="absolute z-10 bg-white p-5 rounded-lg shadow-xl">

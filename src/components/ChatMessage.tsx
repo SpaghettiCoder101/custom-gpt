@@ -25,7 +25,7 @@ export default function ChatMessage({ message, setKeep, removeKeep }: Props) {
     return (
         <div
             key={id}
-            className={`mb-3 relative py-4 ${
+            className={`mb-3 relative py-4 overflow-x-auto ${
                 role === "user" ? userMessagesClass : aiMessagesClass
             }`}
         >
