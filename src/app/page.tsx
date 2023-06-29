@@ -1,17 +1,19 @@
 "use client";
 
 import ChatMessage from "@/components/ChatMessage";
+import TokenInput from "@/components/TokenInput";
 import { Popover } from "@headlessui/react";
 import { useChat } from "ai/react";
 import { useState } from "react";
 
 export default function Chat() {
     const [messagesToKeep, setMessagesToKeep] = useState<string[]>([]);
+    const [tokenToUse, setTokenToUse] = useState<number>(1500);
     const [systemMessage, setSystemMessage] = useState<string>("You are Rondo a heplful AI");
     const { messages, input, handleInputChange, setMessages, append, setInput } = useChat({
         body: {
             systemMessage: systemMessage,
-            maxTokens: 1500,
+            maxTokens: tokenToUse,
         },
     });
 
@@ -49,6 +51,7 @@ export default function Chat() {
 
                     </Popover.Panel>
                 </Popover>
+                <TokenInput token={tokenToUse} tokenChange={setTokenToUse} />
             </div>
             <div className="mx-auto w-full grow overflow-auto max-w-2xl py-24 flex flex-col stretch mb-8 px-4">
                 {messages.map(m => (
