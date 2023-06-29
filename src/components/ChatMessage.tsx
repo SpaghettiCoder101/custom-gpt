@@ -9,8 +9,8 @@ type Props = {
   removeKeep: (keepId: string) => void;
 }
 
-const userMessagesClass = "bg-blue-500 text-white font-bold py-2 px-4 rounded";
-const aiMessagesClass = "bg-gray-300 text-gray-700 font-bold py-2 px-4 rounded";
+const userMessagesClass = "bg-blue-500 text-white py-2 px-4 rounded";
+const aiMessagesClass = "bg-gray-300 text-gray-700 py-2 px-4 rounded";
 
 export default function ChatMessage({ message, setKeep, removeKeep }: Props) {
     const { id, role, content } = message;
