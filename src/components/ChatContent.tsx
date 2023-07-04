@@ -53,12 +53,11 @@ export default function ChatContent( { initialChat, id }: Props ) {
         setInput("");
     }
 
-    function keepAddMessage(id: string) {
-        setMessagesToKeep([...messagesToKeep, id]);
-    }
-
-    function keepRemoveMessage(id: string) {
-        setMessagesToKeep(messagesToKeep.filter(m => m !== id));
+    function keepToggleMessage(id: string) {
+        if(messagesToKeep.includes(id)) 
+            setMessagesToKeep(messagesToKeep.filter(m => m !== id));
+        else
+            setMessagesToKeep([...messagesToKeep, id]);
     }
     return (
         <>
@@ -70,7 +69,7 @@ export default function ChatContent( { initialChat, id }: Props ) {
                 </div>
                 <div className="mx-auto w-full grow overflow-auto max-w-2xl py-24 flex flex-col stretch mb-8 px-4">
                     {messages.map(m => (
-                        <ChatMessage key={m.id} message={m} setKeep={keepAddMessage} removeKeep={keepRemoveMessage} />
+                        <ChatMessage key={m.id} message={m} toggleKeep={keepToggleMessage} messagesToKeep={messagesToKeep} />
                     ))}
                     <ChatInput onSubmit={onSubmit} input={input} handleInputChange={handleInputChange} disabled={isLoading} />
                 </div>

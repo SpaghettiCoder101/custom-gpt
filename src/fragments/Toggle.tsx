@@ -11,7 +11,7 @@ type Props = {
   enabledColor?: string;
   disabledColor?: string;
 };
-
+// TODO remove or use it as a template if needed
 export default function Toggle(props : Props ) {
     const enabledColor = props.enabledColor || "bg-green-300";
     const disabledColor = props.disabledColor || "bg-gray-200";
