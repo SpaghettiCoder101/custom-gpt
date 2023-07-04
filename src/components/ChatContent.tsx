@@ -7,6 +7,7 @@ import { chatModel } from "@/models/chatModel";
 import SaveButton from "@/fragments/SaveButton";
 import ChatInput from "./ChatInput";
 import SystemMessage from "@/fragments/SystemMessage";
+import { useHotkeys } from "react-hotkeys-hook";
 
 type Props = {
     id: string;
@@ -31,6 +32,7 @@ export default function ChatContent( { initialChat, id }: Props ) {
             maxTokens: tokenToUse,
         },
     });
+    useHotkeys("ctrl+enter", () => onSubmit(), { enableOnFormTags: true });
 
     useEffect(() => {
         if (initialChat) {
@@ -40,8 +42,8 @@ export default function ChatContent( { initialChat, id }: Props ) {
         }
     }, [initialChat, id]);
 
-    function onSubmit(e: React.FormEvent<HTMLFormElement>) {
-        e.preventDefault();
+    function onSubmit(e?: React.FormEvent<HTMLFormElement>) {
+        e?.preventDefault();
         const newMessages = messages.filter(m => messagesToKeep.includes(m.id));
         setMessages(newMessages);
         append({
@@ -70,7 +72,7 @@ export default function ChatContent( { initialChat, id }: Props ) {
                     {messages.map(m => (
                         <ChatMessage key={m.id} message={m} setKeep={keepAddMessage} removeKeep={keepRemoveMessage} />
                     ))}
-                    <ChatInput onSubmit={onSubmit} input={input} handleInputChange={handleInputChange} />
+                    <ChatInput onSubmit={onSubmit} input={input} handleInputChange={handleInputChange} disabled={isLoading} />
                 </div>
             </div>
             <StopButton isLoading={isLoading} stop={stop} />
