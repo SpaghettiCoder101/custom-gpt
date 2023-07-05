@@ -34,7 +34,7 @@ export default function ChatMessage({ message, toggleKeep, messagesToKeep }: Pro
     return (
         <div
             key={id}
-            className={`mb-3 relative py-4 overflow-x-auto ${
+            className={`mb-3 relative py-4 ${
                 role === "user" ? userMessagesClass : aiMessagesClass
             } ${messagesToKeep.includes(id) ? keepMessageCalss : ""}`}
             onClick={() => toggleKeep(id)}
