@@ -14,7 +14,7 @@ type Props = {
 
 const userMessagesClass = "bg-blue-500 text-white py-2 px-4 rounded";
 const aiMessagesClass = "bg-gray-300 text-gray-700 py-2 px-4 rounded";
-const keepMessageCalss = "ring-2 ring-red-500";
+const keepMessageCalss = "ring-4 ring-orange-500";
 
 export default function ChatMessage({ message, toggleKeep, messagesToKeep }: Props) {
     const { id, role, content } = message;
@@ -30,11 +30,10 @@ export default function ChatMessage({ message, toggleKeep, messagesToKeep }: Pro
         setParsedContent(content);
     }, [content, setParsedContent]);
 
-
     return (
         <div
             key={id}
-            className={`mb-3 relative py-4 ${
+            className={`mb-3 relative shadow-md cursor-pointer py-4 ${
                 role === "user" ? userMessagesClass : aiMessagesClass
             } ${messagesToKeep.includes(id) ? keepMessageCalss : ""}`}
             onClick={() => toggleKeep(id)}
