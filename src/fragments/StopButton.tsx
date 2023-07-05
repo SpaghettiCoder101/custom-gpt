@@ -7,7 +7,7 @@ type Props = {
 
 export default function StopButton( { isLoading, stop }: Props) {
     return (
-        <div className="fixed bottom-20 left-1/2">
+        <div className="absolute bottom-20 left-1/2 -translate-x-1/2">
             <Transition
                 show={isLoading}
                 enter="transition-all duration-300"
@@ -21,7 +21,7 @@ export default function StopButton( { isLoading, stop }: Props) {
                     className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                     onClick={stop}
                 >
-                      Stop
+                    Stop
                 </button>
             </Transition>
         </div>

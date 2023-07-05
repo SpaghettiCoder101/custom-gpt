@@ -1,3 +1,4 @@
+import StopButton from "@/fragments/StopButton";
 import { useRef, SyntheticEvent, useEffect } from "react";
 
 type Props = {
@@ -5,6 +6,7 @@ type Props = {
   input: string;
   handleInputChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  stop: () => void;
 }
 
 const baseTextAreaHeight = 40;
@@ -42,6 +44,7 @@ export default function ChatInput({ input, handleInputChange, onSubmit, disabled
             >
               Send
             </button>
+            <StopButton isLoading={disabled} stop={stop} />
         </form>
     );
 }

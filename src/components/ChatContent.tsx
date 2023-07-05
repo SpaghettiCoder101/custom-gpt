@@ -71,10 +71,9 @@ export default function ChatContent( { initialChat, id }: Props ) {
                     {messages.map(m => (
                         <ChatMessage key={m.id} message={m} toggleKeep={keepToggleMessage} messagesToKeep={messagesToKeep} />
                     ))}
-                    <ChatInput onSubmit={onSubmit} input={input} handleInputChange={handleInputChange} disabled={isLoading} />
+                    <ChatInput onSubmit={onSubmit} input={input} handleInputChange={handleInputChange} disabled={isLoading} stop={stop} />
                 </div>
             </div>
-            <StopButton isLoading={isLoading} stop={stop} />
         </>
     );
 }
