@@ -8,6 +8,7 @@ import SaveButton from "@/fragments/SaveButton";
 import ChatInput from "./ChatInput";
 import SystemMessage from "@/fragments/SystemMessage";
 import { useHotkeys } from "react-hotkeys-hook";
+import ChatNaming from "@/fragments/ChatNaming";
 
 type Props = {
     id: string;
@@ -16,7 +17,7 @@ type Props = {
 
 const initialChatValue:chatModel = {
     id: "1",
-    title: "Rondo",
+    title: "Rondo The assistant",
     systemMessage: "You are Rondo a heplful AI",
     tokens: 1500,
     messages: [],
@@ -25,6 +26,7 @@ const initialChatValue:chatModel = {
 export default function ChatContent( { initialChat, id }: Props ) {
     const [messagesToKeep, setMessagesToKeep] = useState<string[]>([]);
     const [tokenToUse, setTokenToUse] = useState<number>(1500);
+    const [chatName, setChatName] = useState<string>(initialChatValue.title);
     const [systemMessage, setSystemMessage] = useState<string>("You are Rondo a heplful AI");
     const { messages, input, handleInputChange, setMessages, append, setInput, isLoading, stop } = useChat({
         body: {
@@ -65,7 +67,8 @@ export default function ChatContent( { initialChat, id }: Props ) {
                 <div className="w-full p-4 gap-2 flex border-b-2">
                     <SystemMessage systemMessage={systemMessage} setSystemMessage={setSystemMessage} />
                     <TokenInput token={tokenToUse} tokenChange={setTokenToUse} />
-                    <SaveButton id={id} title={initialChatValue.title} systemMessage={systemMessage} tokens={tokenToUse} messages={messages} />
+                    <SaveButton id={id} title={chatName} systemMessage={systemMessage} tokens={tokenToUse} messages={messages} />
+                    <ChatNaming name={chatName} setName={setChatName} />
                 </div>
                 <div className="mx-auto w-full grow overflow-auto max-w-2xl py-24 flex flex-col stretch mb-8 px-4">
                     {messages.map(m => (

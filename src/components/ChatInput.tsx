@@ -10,7 +10,7 @@ type Props = {
 }
 
 const baseTextAreaHeight = 40;
-export default function ChatInput({ input, handleInputChange, onSubmit, disabled }: Props) {
+export default function ChatInput({ input, handleInputChange, onSubmit, disabled, stop }: Props) {
     const textareaRef = useRef<HTMLTextAreaElement>(null);
 
     const onInputHandler = (event: SyntheticEvent<HTMLTextAreaElement>) => {
