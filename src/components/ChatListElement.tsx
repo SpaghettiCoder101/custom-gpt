@@ -3,7 +3,7 @@ import { useChatContext } from "@/context/ChatContext";
 import { chatModel } from "@/models/chatModel";
 import { useAtom } from "jotai";
 import { useState } from "react";
-import { BsCheckLg, BsPencilFill } from "react-icons/bs";
+import { BsCheckLg, BsPencilFill, BsTrash3Fill } from "react-icons/bs";
 
 type Props = {
   item: chatModel;
@@ -12,7 +12,7 @@ export default function ChatListElement({ item }:Props){
     const [selectedChat, setSelectedChat] = useAtom(selectedChatAtom);
     const [editMode, setEditMode] = useState<boolean>(false);
     const [chatName, setChatName] = useState<string>(item.title);
-    const { updateChatName } = useChatContext();
+    const { updateChatName, deleteChat } = useChatContext();
 
     function onEdit(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
         e.stopPropagation();
@@ -20,6 +20,12 @@ export default function ChatListElement({ item }:Props){
         if(editMode) updateChatName(item.id, chatName);
 
         setEditMode(!editMode);
+    }
+
+    function onDelete(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+        e.stopPropagation();
+
+        deleteChat(item.id);
     }
 
     return (
@@ -37,7 +43,10 @@ export default function ChatListElement({ item }:Props){
                     {item.title}
                 </div> 
             }
-            <button className="hidden group-hover:block" onClick={onEdit}>{editMode ? <BsCheckLg /> : <BsPencilFill />}</button>
+            <div className="flex gap-2">
+                <button className="hidden group-hover:block" onClick={onEdit}>{editMode ? <BsCheckLg /> : <BsPencilFill />}</button>
+                <button className="hidden group-hover:block" onClick={onDelete}><BsTrash3Fill /></button>
+            </div>
         </div>
     );
 }
