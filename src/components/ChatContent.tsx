@@ -9,6 +9,7 @@ import { useHotkeys } from "react-hotkeys-hook";
 import ChatNaming from "@/fragments/ChatNaming";
 import { useAtomValue } from "jotai";
 import { selectedChatAtom } from "@/atoms/selectedChatAtom";
+import NewChatButton from "@/fragments/NewChatButton";
 
 
 
@@ -63,6 +64,7 @@ export default function ChatContent( ) {
                     <SystemMessage systemMessage={systemMessage} setSystemMessage={setSystemMessage} />
                     <TokenInput token={tokenToUse} tokenChange={setTokenToUse} />
                     <SaveButton id={selectedChat.id} title={chatName} systemMessage={systemMessage} tokens={tokenToUse} messages={messages} />
+                    <NewChatButton />
                     <ChatNaming name={chatName} setName={setChatName} />
                 </div>
                 <div className="mx-auto w-full grow overflow-auto max-w-2xl py-24 flex flex-col stretch mb-8 px-4">

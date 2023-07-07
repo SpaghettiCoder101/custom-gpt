@@ -11,3 +11,7 @@ const initialChatValue:chatModel = {
 
 export const selectedChatAtom = atom<chatModel>(initialChatValue);
 
+export const resetSelectedChatAtom = atom(null, (_get, set) => {
+    set(selectedChatAtom, initialChatValue);
+},
+);
