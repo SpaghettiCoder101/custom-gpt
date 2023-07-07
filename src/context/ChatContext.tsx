@@ -1,5 +1,6 @@
 import { chatModel } from "@/models/chatModel";
 import React, { createContext, useContext, useState, useEffect } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 type ChatContextType = {
   allItems: chatModel[];
@@ -50,6 +51,7 @@ export const ChatProvider: React.FC<React.PropsWithChildren<Record<string, unkno
     }, []);
 
     function saveToStorage(valueToSave: chatModel){
+        if(valueToSave.id === "1") valueToSave.id = uuidv4();
         try {
             const savedValue = window.localStorage.getItem("chats");
             let newSavedValue = savedValue ? JSON.parse(savedValue) : null;
