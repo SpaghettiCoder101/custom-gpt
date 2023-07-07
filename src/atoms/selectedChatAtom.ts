@@ -7,6 +7,7 @@ const initialChatValue:chatModel = {
     systemMessage: "You are Rondo a heplful AI",
     tokens: 1500,
     messages: [],
+    keptMessages: [],
 };
 
 export const selectedChatAtom = atom<chatModel>(initialChatValue);

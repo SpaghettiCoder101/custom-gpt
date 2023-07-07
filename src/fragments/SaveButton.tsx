@@ -1,11 +1,11 @@
 import { useChatContext } from "@/context/ChatContext";
 import { chatModel } from "@/models/chatModel";
 
-export default function SaveButton({ id, title,systemMessage,tokens, messages }:chatModel) {
+export default function SaveButton({ id, title,systemMessage,tokens, messages, keptMessages }:chatModel) {
     const { saveToStorage } = useChatContext();
     function saveChat() {
         saveToStorage({
-            id, title, systemMessage,tokens, messages, 
+            id, title, systemMessage,tokens, messages, keptMessages,
         });
     }
 

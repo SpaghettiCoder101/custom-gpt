@@ -35,9 +35,12 @@ export default function ChatContent( ) {
             setTokenToUse(selectedChat.tokens);
             setMessages(selectedChat.messages);
             setChatName(selectedChat.title);
+            setMessagesToKeep(selectedChat.keptMessages);
         }
 
     }, [selectedChat]);
+
+
 
     function onSubmit(e?: React.FormEvent<HTMLFormElement>) {
         e?.preventDefault();
@@ -63,7 +66,7 @@ export default function ChatContent( ) {
                 <div className="w-full p-4 gap-2 flex border-b-2">
                     <SystemMessage systemMessage={systemMessage} setSystemMessage={setSystemMessage} />
                     <TokenInput token={tokenToUse} tokenChange={setTokenToUse} />
-                    <SaveButton id={selectedChat.id} title={chatName} systemMessage={systemMessage} tokens={tokenToUse} messages={messages} />
+                    <SaveButton id={selectedChat.id} title={chatName} systemMessage={systemMessage} tokens={tokenToUse} messages={messages} keptMessages={messagesToKeep} />
                     <NewChatButton />
                     <ChatNaming name={chatName} setName={setChatName} />
                 </div>

@@ -5,5 +5,6 @@ export type chatModel = {
   title:string,
   systemMessage:string,
   tokens:number,
-  messages:Message[]
+  messages:Message[],
+  keptMessages:string[],
 }
