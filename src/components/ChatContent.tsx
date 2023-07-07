@@ -9,6 +9,8 @@ import ChatInput from "./ChatInput";
 import SystemMessage from "@/fragments/SystemMessage";
 import { useHotkeys } from "react-hotkeys-hook";
 import ChatNaming from "@/fragments/ChatNaming";
+import { currentChatAtom } from "@/atoms/currentChatAtoms";
+import { useSetAtom } from "jotai";
 
 type Props = {
     id: string;
@@ -28,6 +30,7 @@ export default function ChatContent( { initialChat, id }: Props ) {
     const [tokenToUse, setTokenToUse] = useState<number>(1500);
     const [chatName, setChatName] = useState<string>(initialChatValue.title);
     const [systemMessage, setSystemMessage] = useState<string>("You are Rondo a heplful AI");
+    const setCurrentChat = useSetAtom(currentChatAtom);
     const { messages, input, handleInputChange, setMessages, append, setInput, isLoading, stop } = useChat({
         body: {
             systemMessage: systemMessage,
@@ -42,6 +45,8 @@ export default function ChatContent( { initialChat, id }: Props ) {
             setTokenToUse(initialChat.tokens);
             setMessages(initialChat.messages);
         }
+        if(id)
+            setCurrentChat(id);
     }, [initialChat, id]);
 
     function onSubmit(e?: React.FormEvent<HTMLFormElement>) {
