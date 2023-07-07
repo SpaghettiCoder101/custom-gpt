@@ -65,6 +65,7 @@
     "react/jsx-closing-bracket-location": ["error", "line-aligned"],
     "react/jsx-first-prop-new-line": ["error", "multiline"],
     "react/react-in-jsx-scope": "off",
-    "react/no-unknown-property": ["off"]
+    "react/no-unknown-property": ["off"],
+    "react-hooks/exhaustive-deps": "off"
   }
 }

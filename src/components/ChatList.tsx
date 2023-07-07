@@ -1,15 +1,13 @@
-import { currentChatAtom } from "@/atoms/currentChatAtoms";
+import { selectedChatAtom } from "@/atoms/selectedChatAtom";
 import { useChatContext } from "@/context/ChatContext";
-import { chatModel } from "@/models/chatModel";
-import { useAtomValue } from "jotai";
+import { useAtom } from "jotai";
 
-type ChatListProps = {
-    setSelectedChat: (value: chatModel) => void;
-};
 
-export default function ChatList( { setSelectedChat }: ChatListProps) {
+
+export default function ChatList() {
+    const [selectedChat, setSelectedChat] = useAtom(selectedChatAtom);
     const { allItems } = useChatContext();
-    const currentChat = useAtomValue(currentChatAtom);
+
     return (
         <div className="flex flex-col w-1/4 max-w-sm h-screen bg-gray-100">
             <div className="flex flex-col p-4">
@@ -19,7 +17,7 @@ export default function ChatList( { setSelectedChat }: ChatListProps) {
                         className="flex flex-row justify-between" 
                         onClick={() => setSelectedChat(item)}
                     >
-                        <div className={`${currentChat === item.id ? "bg-orange-500 text-white" : "bg-gray-500"}`}>
+                        <div className={`${selectedChat.id === item.id ? "bg-orange-500 text-white" : "bg-gray-500"}`}>
                             {item.title}
                         </div>
                     </div>
