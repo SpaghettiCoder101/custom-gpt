@@ -4,12 +4,15 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 type ChatContextType = {
   allItems: chatModel[];
   saveToStorage: (valueToSave: chatModel) => void;
+  updateChatName: (id: string, newName: string) => void;
 };
 
 const ChatContext = createContext<ChatContextType>({
     allItems: [],
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     saveToStorage: () => {},
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    updateChatName: () => {},
 });
 
 export const useChatContext = () => useContext(ChatContext);
@@ -28,7 +31,7 @@ export const ChatProvider: React.FC<React.PropsWithChildren<Record<string, unkno
         }
     }, []);
 
-    const saveToStorage = (valueToSave: chatModel) => {
+    function saveToStorage(valueToSave: chatModel){
         try {
             const savedValue = window.localStorage.getItem("chats");
             let newSavedValue = savedValue ? JSON.parse(savedValue) : null;
@@ -52,10 +55,34 @@ export const ChatProvider: React.FC<React.PropsWithChildren<Record<string, unkno
         } catch (error) {
             console.error(error);
         }
-    };
+    }
+
+    function updateChatName(id: string, newName: string){
+        try {
+            const savedValue = window.localStorage.getItem("chats");
+            if(!savedValue) return;
+            const chats = JSON.parse(savedValue);
+            const findChat = chats.find((chat:chatModel) => chat.id === id);
+            if(findChat){
+                const index = chats.indexOf(findChat);
+                chats[index].title = newName;
+            }
+            window.localStorage.setItem("chats", JSON.stringify(chats));
+            setAllItems(chats);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+
+
 
     return (
-        <ChatContext.Provider value={{ allItems, saveToStorage }}>
+        <ChatContext.Provider
+            value={{
+                allItems, saveToStorage, updateChatName, 
+            }}
+        >
             {children}
         </ChatContext.Provider>
     );
